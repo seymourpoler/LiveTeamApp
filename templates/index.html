@@ -1,0 +1,288 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="/static/{{version}}/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="/static/{{version}}/style.css"/>
+<link rel="shortcut icon" href="/static/favicon.ico" />
+<title>{{ APP_NAME }} | {{team}}</title>
+
+<script type="text/javascript" src="/static/{{version}}/lib/jquery-1.7.1.min.js">
+</script>
+<script type="text/javascript" src="/static/{{version}}/lib/socket.io.js">
+</script>
+<script type="text/javascript" 
+    src="/static/{{version}}/lib/jquery-ui-1.8.24.custom.min.js">
+</script>
+<script type="text/javascript" 
+  src="/static/{{version}}/lib/jquery-datatables.min.js">
+</script>
+<script type="text/javascript" src="/static/{{version}}/lib/underscore-min.js">
+</script>
+
+<script type="text/javascript" src="/static/{{version}}/lib/backbone-min.js">
+</script>
+  
+<script type="text/javascript" src="/static/{{version}}/lib/visibility.js">
+</script>
+<script type="text/javascript" src="/static/{{version}}/lib/jquery-idle-min.js">
+</script>
+
+  {% if version != "." %}
+     <script type="text/javascript" src="/static/{{version}}/lib/sOn-0.1.0.min.js"></script>
+     <script type="text/javascript" src="/static/{{version}}/app/liveteamapp.min.js"></script>
+  {% else %}
+  <script type="text/javascript" src="/static/{{version}}/lib/sOn-0.1.0.js"></script>
+  
+
+
+  <script type="text/javascript" src="/static/{{version}}/app/main.js"></script>
+  <script type="text/javascript" src="/static/{{version}}/app/common.js"></script>
+  <script type="text/javascript" src="/static/{{version}}/app/widgets.js"></script>
+  <script type="text/javascript" src="/static/{{version}}/app/storage.js"></script>
+  <script type="text/javascript" src="/static/{{version}}/app/tasks.js"></script>
+  <script type="text/javascript" src="/static/{{version}}/app/interactors.js"></script>
+  <script type="text/javascript" src="/static/{{version}}/app/databinders.js"></script>
+  <script type="text/javascript" src="/static/{{version}}/app/clock.js"></script>
+  <script type="text/javascript" src="/static/{{version}}/app/pomodoro.js"></script>     
+  <script type="text/javascript" src="/static/{{version}}/app/chat.js"></script>    
+  <script type="text/javascript" src="/static/{{version}}/app/services.js"></script>
+  <script type="text/javascript" src="/static/{{version}}/app/factory.js"></script>    
+  <script type="text/javascript" src="/static/{{version}}/app/startup.js"></script>    
+  {% endif %}
+</head>
+
+<body>
+
+<div class="row header">
+   <div class="span5 appTitle">
+     <img src="/static/{{version}}/img/logo_small.png"/> <span> {{ APP_NAME }} </span>
+   </div>
+   <div class="slogan appTitle">
+   </div>
+   <div style="float: right; padding-right: 10px;">
+    <span style="margin-right: 30px; color:#555;">Logged as: 
+      <b>{{username}}</b> in {{team}} team</span> |
+    <a href="/">Logout</a> | 
+    <a target="blank" href="/faq">FAQ</a> | 
+    <a target="blank" href="http://twitter.com/LiveTeamApp">News</a> | 
+    <!--<a target="blank" href="/goPremium">Go Premium</a>-->
+  </div>
+  <br>
+</div>
+
+
+
+
+<div id="main" class="container-fluid">
+ <div class="row-fluid">
+
+    <div class="sidebar span3">
+          <div class="menu" style="display:none;">
+            <ul class="nav">
+              <li>
+                <a id="dashboardMenu" class="btn active" href="#dashboard"><i class="icon-home"></i>  Dashboard</a></li>
+              <li>
+                <a  id="teamMenu" class="btn" href="#team"><i class="icon-info-sign"></i> Team Monitor</a></li>
+            </ul>           
+          </div>
+          <div id="teamChat" class="alert alert-info draggable-panel">
+            <img class="icon-draggable" src="/static/{{version}}/img/draggable.gif">
+             <b>Team Chat</b>
+             <hr/>
+             <div id="wholeTeamChat" class="whole-team-chat"></div>
+             <textarea id="wholeTeamChatInput" class="whole-team-input"></textarea>
+             <div><a target="blank" href="/faq#chat"><small>help</small></a></div>
+          </div>
+          <!--<div id="statusPanel" class="alert alert-info draggable-panel">
+            <img class="icon-draggable" src="/static/{{version}}/img/draggable.gif">
+            <b>My status</b>
+            <hr/>
+            <input type="text" id="myStatus"/><a href="#" class="btn">update</a>
+          </div>-->
+          <div id="teamMonitor" class="alert alert-info draggable-panel">
+            <img class="icon-draggable" src="/static/{{version}}/img/draggable.gif">
+            <b>Team Monitor</b>
+            <hr/>
+            <div id="statusPanel">
+                <div>I am <select id="myLocation"/></select></div>
+            </div>
+            <hr/>
+            <div id="teamViewer" class="teamViewer">
+                 Loading...
+            </div>
+            <div id="sleeping" style="display:none;">
+              The team monitor is sleeping. Move the mouse to wake it up.
+            </div>
+            <div>
+              <a href="/faq#teamColours" target="blank"><small>What do the colours mean?</small></a></div>
+          </div>
+          
+          <div id="todayTotalsWidget" class="alert alert-info">
+          </div>
+          
+          
+    </div>
+
+  <div id="teamPage" class="span9" style="display:none;">
+    <div class="row">
+      <h3>Team Monitor:</h3>
+            <blockquote><p>
+        What my team mates are doing and how they see what I am doing
+            </p></blockquote>
+        
+      </div>
+  </div>
+
+  {% if isCreatingTeam %}
+    <div id="isCreatingTeam" class="help_dialog modal fade in">  
+      <div class="modal-header" style="font-size: 19px;">  
+        <a onclick="javascript: $('#isCreatingTeam').hide();" id ="closeExplanationModal" class="close" data-dismiss="modal">×</a>  
+        <h3 style="font-size: 20px;">Welcome to LiveTeamApp!</h3>  
+          <p>You have just created a new team</p>
+        </div>  
+        <div id="explanationContent" class="modal-body">  
+           <h3>Congratulations! you have created a new team</h3>
+           </br>
+           <p style="font-size:19px;">
+           Now you only have to <b>invite your colleagues</b> to boost your team
+           productivity.
+           Ask them to sign in, using {{team}} as the team name, or send them
+           a direct link to the application. </p>
+           <p style="font-size:19px;">
+           </br>
+           <b>Example</b> link address for Joe:
+           <a target="blank" href="http://{{apphost}}/{{team}}/joe">http://{{apphost}}/{{team}}/joe</a>
+           </p>
+        </div>  
+        <div class="modal-footer">  
+          <!-- <a href="#" class="btn" data-dismiss="modal">Close</a> -->
+        </div>  
+    </div>  
+  {% endif %}
+
+  <div id="tabs">
+  <ul class="span9 nav nav-tabs">
+    <li>
+      <a id="tasksTab" class="btn active" href="#tasks">Work in progress</a>
+    </li>
+    <li>
+      <a id="pomodoroTab" class="btn" href="#pomodoro">Pomodoro</a>
+    </li>
+    <li>
+      <a id="historyTab" class="btn" href="#history">History</a>
+    </li>
+    <li>
+      <a id="fullTab" class="btn" href="#full">Full View</a>
+    </li>
+    <li>
+      <a id="settingsTab" class="btn" href="#settings">Settings</a>
+    </li>
+  </ul>
+  </div>
+
+  <div id="settingsPage" class="span9" style="display:none;">
+    <div class="row">
+      <h3>Settings:</h3>
+            <blockquote><p>
+        Configure the application
+            </p></blockquote>
+        <div class="span9">
+          <h4>Chat configuration:</h4>
+          </br>
+          <ul>
+            <li>
+              <input id="confChatPopUpAlert" type="checkbox" name="confChatPopUpAlert" value="confChatPopups">  Pop up a notification when I receive new chat messages while I am in other tab or window (only Google Chrome supports this feature).
+            </li>
+            <li>
+              <input disabled="disabled" id="confChatSoundAlert" type="checkbox" name="confChatSoundAlert" value="checked" checked="checked">  Play a sound when I receive new chat messages while I am in other tab or window.
+            </li>
+          </ul>
+          <hr>
+        </div>
+        
+        <div class="span8">
+          <h4>Pomodoro configuration:</h4>
+          </br>
+          <ul>
+            <li>
+              <input disabled="disabled" id="confPomodoroUseBlockingAlert" type="checkbox" name="confPomodoroUseBlockingAlert" value="confPomodoroUseBlockingAlert">  Use intrusive blocking alerts at the end of the pomodoro
+            </li>
+            <li>
+              <input disabled="disabled" id="confPomodoroUsePopUpAlert" type="checkbox" name="confPomodoroUsePopUpAlert" value="confPomodoroUsePopUpAlert" checked="checked">  Pop up a window at the end of the pomodoro (you need to configure your browser to allow pop ups from LiveTeamApp.com site)
+            </li>
+            <li>
+              <input disabled="disabled" id="confPomodoroSoundAlert" type="checkbox" name="confPomodoroSoundAlert" value="confPomodoroSoundAlert" checked="checked">  Play a sound at the end of the pomodoro (currently a cat's meow)
+            </li>
+          </ul>
+        </div>
+      </div>
+  </div>  
+
+  <div id="pomodorosPage" class="span9" style="display:none;">
+   <div class="row">
+    <h3>Countdown:</h3>
+          <blockquote><p>
+		  Pomodoro technique: Start the countdown and focus on the task, avoiding any interruptions. Then take a short break and repeat.
+		  </p></blockquote>
+      <div class="span3 pomodoroControls">
+        Minutes: 
+           <input id="sizeInMinutesBox" type="text" size="5" value="30"/>
+           <a href="#" id="pomodoroLauncher" class="btn play"></a>
+           <a href="#" style="display: none;" id="pomodoroTerminator" class="btn stop"></a>
+      </div>
+      <div class="span7" id="progress">
+      </div>
+   </div>
+  </div>
+
+    <div id="tasksPage" class="span9">
+        <div id="tasksPanel" class="row">
+             <div class="span12">
+                <h3>{{TASKS_MONITOR_TITLE}}:</h3>
+                <blockquote><p>
+				Enter your current task and measure the time it takes. You can only work on one task at a time.
+				</p></blockquote>
+
+                <a href="#" id="taskButton" class="btn"><i class="icon-search"></i></a>&nbsp;&nbsp;&nbsp;
+                <a href="#" id="unexpectedTaskButton" class="btn"></a>&nbsp;&nbsp;&nbsp;
+                <div style="margin-top: 20px;">
+                  <table id="tasks" class="table table-bordered">
+                  </table>
+                </div>
+              </div>
+        </div>
+
+        <div id="finishedTasksPanel" class="row" style="display:none;">
+         <div class="span12">
+           <h3>History:</h3>
+		   <blockquote><p>
+				Those who ignore history are bound to repeat it.
+			</p></blockquote>
+          <a href="#" id="exportButton" class="btn"></a>&nbsp;&nbsp;&nbsp;
+          <br/>
+          <table id="finishedTasks"  class="table table-bordered">
+          </table>
+         </div>
+        </div>
+    </div>
+
+<div id="exportWidget" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-header">  
+    <a id ="closeExportWidget" class="close" data-dismiss="modal">×</a>  
+    <h3>Data Export</h3>  
+    <p>Copy and paste the text. Google docs and others can import it as is</p>
+  </div>  
+  <div id="exportWidgetContent" class="modal-body">  
+  </div>  
+  <div class="modal-footer">  
+    <!-- <a href="#" class="btn" data-dismiss="modal">Close</a> -->
+  </div>  
+</div>  
+
+</div>
+
+</div>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Integration Tests (XPLive)</title>
+
+  <link rel="shortcut icon" type="image/png" href="/static/test/lib/jasmine-1.1.0/jasmine_favicon.png"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf8"/>
+  <link rel="stylesheet" type="text/css" href="/static/test/lib/jasmine-1.1.0/jasmine.css"/>
+  <script type="text/javascript" src="/static/test/lib/jasmine-1.1.0/jasmine.js"></script>
+  <script type="text/javascript" src="/static/test/lib/jasmine-1.1.0/jasmine-html.js"></script>
+
+  <!-- include source files here... -->
+  <script type="text/javascript" src="/static/lib/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="/static/lib/sOnTesting.js"></script>
+  
+  <!-- include spec files here... -->
+  <script type="text/javascript" src="/static/test/spec/integration.js"></script>
+
+  <iframe name="app" height="450" width="900">
+  </iframe>
+  
+  
+  <script type="text/javascript">
+    (function() {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+		
+		window.isRunningIntegrationTests = true;
+      var trivialReporter = new jasmine.TrivialReporter();
+
+      jasmineEnv.addReporter(trivialReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return trivialReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+      }
+
+    })();
+  </script>
+
+</head>
+
+<body>
+</body>
+</html>

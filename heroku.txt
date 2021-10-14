@@ -1,0 +1,12 @@
+Documentation - Heroku + Python + Flask + SqlAlchemy:
+
+- https://devcenter.heroku.com/articles/python/
+- https://github.com/jamesward/flaskbars
+
+Updates:
+
+heroku addons:add heroku-postgresql:dev -a your_app
+heroku addons:add pgbackups
+heroku addons:remove --confirm shared-database 
+heroku pg:promote HEROKU_POSTGRESQL_OLIVE
+

@@ -1,0 +1,118 @@
+<html>
+<head>
+
+<title>{{ APP_NAME }}</title>
+<link rel="stylesheet" type="text/css" href="/static/{{version}}/bootstrap.css"/>
+<link rel="shortcut icon" href="/static/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="/static/{{version}}/style.css"/>
+<script type="text/javascript" src="/static/{{version}}/lib/jquery-1.7.1.min.js">
+</script>
+<script type="text/javascript" src="/static/{{version}}/lib/jquery.validate.min.js">
+</script>
+
+<script type="text/javascript">
+var openApp = function(form){
+	var team = $("#teamNameText").val();
+	var user = $("#userNameText").val();
+	if (user.length < 2){
+		alert('Please type your username');
+		return false;
+	};
+	var url = window.location.href + "/" + team + "/" + user;
+	url = url.replace(/\/\//g, "/");
+	url = url.replace("http:/", "http://");
+	url = url.replace("https:/", "https://");
+	url = url.replace(" ", "");
+	window.location.href = url;
+	return false;
+};
+
+$('document').ready(function(){
+	$("#loginForm").validate({ submitHandler: openApp});
+});
+
+</script>
+
+
+</head>
+<body>
+
+<div class="row">
+
+<div class="hero-unit">
+ <div style="float: left; width: 50%;">	
+  <h1>{{APP_NAME}}</h1>
+
+  <p><img src="/static/{{version}}/img/tick.png"/>Synchronize with your team to reduce interruptions.</p>
+  <p><img src="/static/{{version}}/img/tick.png"/>Chat with your colleagues.</p>
+  <p><img src="/static/{{version}}/img/tick.png"/>Measure your work to improve your estimates.</p>
+  
+</div>
+  <div style="float: right; padding-top: 10px; width: 50%">
+			<form id="loginForm" method="get" action="">
+			<fieldset>
+			  <legend>Sign in</legend>
+			  <p><img src="/static/{{version}}/img/tick.png"/>No registration required.</p>
+			  <p>Your accout is automatically created the first time you sign in</p>
+			  <div style="padding-left: 1%; padding-top: 10px; padding-bottom: 15px;">
+			  <label for="teamNameText" style="display: inline-block; color: #000; font-size: 15px;">Team:</label>
+			  <input id="teamNameText" type="text" class="required" minlength="2">
+			  <label for="userNameText" style="padding-left: 5px; display: inline-block; color: #000; font-size: 15px;">User:</label>
+			  <input id="userNameText" type="text" class="required" minlength="2">
+			  <input type="submit" class="btn" value="Go!"></input>
+			  </div>
+			  <span style="padding-left: 10%;">To create a new team just choose a name and tell it to</span></br>
+			  <span style="padding-left: 10%;">your 
+			  colleagues for them to sign in the same team.</span>
+			</fieldset>
+			</form>
+  </div>
+</div> 
+</div>
+
+<div class="container-fluid softSilverGradient">
+ <div class="row-fluid" style="margin-left: 10px;">
+		<div class="span4">
+			<img src="/static/{{version}}/img/xplive4.png"/>
+		</div>
+		<div class="span4 landingColumn">
+			<h3>Features</h3>
+			<div class="featuresAndNews">
+			<ul class="unstyled">
+				<li>
+					<span class="badge badge-info">1</span>
+					<strong>Pomodoro</strong> technique support for every team member. 
+					The progress of member's timers is displayed to everyone. The ideal method to synchronise interactions.
+				</li>
+				<li>
+					<span class="badge badge-info">2</span>
+					<strong>Monitors</strong> how long it takes for you to finish each task, including interruptions and all associated pomodoros. It complements ticketing systems such as Jira, Trello, Trac etc.
+
+				</li>
+				<li>
+					<span class="badge badge-info">3</span>
+					<strong>Smart Chat:</strong> chat with your colleagues. Incoming messages
+					are retained for those on pomodoro until it finishes.
+				</li>				
+				<li>
+					<span class="badge badge-info">4</span>
+					<strong>Summarizes</strong> your daily activity 
+					giving you a quick overview of your productivity.
+				</li>
+			</ul>
+			</div>
+		</div>
+		<div class="span4 landingColumn">
+			<img src="/static/{{version}}/img/xplive3.png"/>
+
+		</div>		
+ </div>
+ <div class="row footer">
+ 	<a target="blank" href="http://www.carlosble.com">carefully crafted for you by Carlos Ble</a> 
+ 	 &nbsp;|&nbsp; 
+ 	 Get the latests news in twitter <a target="blank" href="http://twitter.com/LiveTeamApp"><img width="50" height="50" src="https://twitter.com/images/resources/twitter-bird-light-bgs.png"></img>
+ </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<html>
+<head>
+
+<title>{{ APP_NAME }}</title>
+<link rel="stylesheet" type="text/css" href="/static/{{version}}/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="/static/{{version}}/style.css"/>
+<script type="text/javascript" src="/static/{{version}}/lib/jquery-1.7.1.min.js">
+</script>
+<script type="text/javascript" src="/static/{{version}}/lib/jquery.validate.min.js">
+</script>
+
+
+</head>
+<body style="background-color: #eee; font-size: 15px">
+
+<div class="row">
+	<div class="hero-unit" style="height: 50px;">
+	 <div style="float: left; width: 100%;">	
+	  <h1>{{APP_NAME}}</h1>
+	  <h2>Frequently Asked Questions</h2>
+	  </div>
+	</div> 
+</div>
+<div class="row">
+  <div class="questions span10 offset1">
+  	<h2>Questions</h2>
+  	<ul>
+      <li><a href="#chat">How does the chat service work?</a></li>
+  		<!--<li><a href="#premium">What benefits do I get if I pay the premium version?</a>-->
+  		</li>
+  		<li><a href="#teamColours">What do the colours mean in the Team Monitor?</a>
+  		</li>
+  		<li><a href="#news">How do I know what features are new?</a>
+  		</li>
+  		<li><a href="#support">Is it possible to get support?</a>
+  		</li>  		
+  	</ul>
+  </div>
+
+  <div class="answers span10 offset1">
+  	</br><hr>
+  	<h2>Answers</h2>
+  </br>
+    <a name="chat"></a>
+    <h3>How does the chat service work?</h3>
+    You can chat with the whole team or individually. </br>
+    <ul>
+      <li>Whole team chat:
+    Every message you enter in the "Team Chat" is delivered to 
+    all the collegues connected at that time. Users connecting after you
+    sent the message will not see it.
+      </li>
+      <li>Chat individually:
+    To chat individually locate your colleague's button in the "Team Monitor",
+    and click on it. If she is on pomorodo, you can send the message
+    but it won't be displayed until she finishes it. However she still can
+    see messages sent to the whole team.
+    </li>
+    </ul>
+    </br><hr>
+  	<a name="teamColours"></a>
+  	<h3>What do the colours mean in the Team Monitor?
+  	</h3>
+  		<ul>
+  			<li>Red: mate is concentrated, on pomorodo, please don't interrupt her until the end of the countdown.</li>
+  			<li>Blue: mate is working on a task, but she can help you anytime you need it</li>
+  			<li>Orange: mate is apparently taking a break.</li>
+        <li>Dark: there are more than one session opened at the same time with the same user account. This is 
+          not recommended, please do not open the application
+          in several tabs or windows.</li>
+        <li>Changing colours: do colours change constantly
+          with no sense? This means that the same user
+          account is opened several times. From the 
+          same machine or from different machines.</li>
+  		</ul>
+  	</br><hr>
+  	<a name="news"></a>
+  	<h3>How do I know what features are new?</h3>
+  	<p>
+  		Updates are published in <a target="blank" href="http://twitter.com/LiveTeamApp">http://twitter.com/LiveTeamApp</a>
+  	</p>
+  	</br><hr>
+<!--<a name="premium"></a>
+    <h3>What benefits do I get if I pay for the premium version?</h3>
+      <ul>
+        <li>Protect your account with password</li>
+        <li>Charts and statistics: 
+        Visualize your data in a way that makes
+        sense for the business.
+        </li>
+        <li>Customizable behavior: 
+        Decide if you want to automatically stop
+        the running task when you close the application and many more configurations.
+        </li>
+        <li>Tasks tracker integration:
+        Be able to select the tasks from Jira, Trello or Pivotal Tracker. 
+        </li>
+      </ul>
+      <a href="/goPremium">Click here to go premium. It is just 3$ per user/month.</a>
+    </br><hr>    
+  -->
+  	<a name="support"></a>
+  	<h3>Is is possible to get support?</h3>
+  	<p>
+  		It is possible indeed. Just send me an email to
+  		carlos@iexpertos.com and I will be happy to help you.
+  	</p>
+  </div>
+</div>
+</br></br>
+<div class="container-fluid">
+	<hr>
+ <div class="row footer">
+ 	<a target="blank" href="http://www.carlosble.com">carefully crafted for you by Carlos Ble</a> 
+ 	 &nbsp;|&nbsp; 
+ 	 Get the latests news in twitter <a target="blank" href="http://twitter.com/LiveTeamApp">
+ 	 <img width="50" height="50" src="https://twitter.com/images/resources/twitter-bird-light-bgs.png">
+ 	</img>
+ </div>
+</div>
+</body>
+
+</html>

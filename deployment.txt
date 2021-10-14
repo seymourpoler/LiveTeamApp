@@ -1,0 +1,16 @@
+edit deploy.sh to change version number
+> bash deploy.sh
+edit server.py to change version number 
+> git commit -a -m "new release"
+> git push heroku master
+
+Notes:
+- If new files are added to the app, grunt.js must be modified to contain those files.
+- If the chat server is changed, chatServer.py must be copied to ../chatServer/chatServer.js
+and then:
+> git commit -a -m "new release"
+> git push heroku master
+- If sOn.js is updated, the minified version must be updated because it is deployed
+
+
+
