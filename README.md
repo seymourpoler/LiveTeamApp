@@ -91,5 +91,8 @@ We highly recomend to install using [Homebrew](http://mxcl.github.com/homebrew/)
 - Start App
 - Open static/test/unitTests.htm 
 
+# Authors:
+  [carlos Blé Jurado](https://github.com/carlosble)
+
 
 
