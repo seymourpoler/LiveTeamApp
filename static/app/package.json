@@ -3,7 +3,7 @@
   "description" : "Productivity tool",
   "homepage" : "<a href=\"http://liveteamapp.com\">LiveTeamApp</a>",
   "keywords" : ["liveteamapp", "pomodoro", "chat", "team", "tasks"],
-"author" : "<a href=\"mailto:ble.jurado@gmail.com\">Carlos Ble , ble.jurado@gmail.com</a>",
+  "author" : "<a href=\"mailto:ble.jurado@gmail.com\">Carlos Ble , ble.jurado@gmail.com</a>",
   "contributors" : [],
   "dependencies" : [],
   "repository" : {},
