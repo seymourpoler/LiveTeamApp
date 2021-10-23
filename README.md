@@ -92,7 +92,4 @@ We highly recomend to install using [Homebrew](http://mxcl.github.com/homebrew/)
 - Open static/test/unitTests.htm 
 
 # Authors:
-- [carlos Blé Jurado](https://github.com/carlosble)
-
-
-
+- [Carlos Blé Jurado](https://github.com/carlosble)
